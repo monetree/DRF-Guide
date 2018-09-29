@@ -16,6 +16,9 @@
 
       {% block style %}
         {% block bootstrap_theme %}
+          <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/argon.min.css" %}"/>
+          <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/nucleo.min.css" %}"/>
+          <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/font-awesome.min.css" %}"/>
           <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap.min.css" %}"/>
           <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap-tweaks.css" %}"/>
         {% endblock %}
@@ -32,44 +35,8 @@
   <body class="{% block bodyclass %}{% endblock %}">
 
     <div class="wrapper">
-      {% block navbar %}
-        <div class="navbar navbar-static-top {% block bootstrap_navbar_variant %}navbar-inverse{% endblock %}"
-             role="navigation" aria-label="{% trans "navbar" %}">
-          <div class="container">
-            <span>
-              {% block branding %}
-                <a class='navbar-brand' style="color:white;" rel="nofollow" href='https://github.com/monetree'>
-                    DRF Guide
-                </a>
-              {% endblock %}
-            </span>
-            <ul class="nav navbar-nav pull-right">
-              {% block userlinks %}
-                {% if user.is_authenticated %}
-                  {% optional_logout request user %}
-                {% else %}
-                  {% optional_login request %}
-                {% endif %}
-              {% endblock %}
-            </ul>
-          </div>
-        </div>
-      {% endblock %}
 
       <div class="container">
-        {% block breadcrumbs %}
-          <ul class="breadcrumb">
-            {% for breadcrumb_name, breadcrumb_url in breadcrumblist %}
-              {% if forloop.last %}
-                <li class="active"><a href="{{ breadcrumb_url }}">{{ breadcrumb_name }}</a></li>
-              {% else %}
-                <li><a href="{{ breadcrumb_url }}">{{ breadcrumb_name }}</a></li>
-              {% endif %}
-            {% empty %}
-              {% block breadcrumbs_empty %}&nbsp;{% endblock breadcrumbs_empty %}
-            {% endfor %}
-          </ul>
-        {% endblock %}
 
         <!-- Content -->
         <div id="content" role="main" aria-label="{% trans "content" %}">
@@ -83,8 +50,7 @@
                   <div class="btn-group format-selection">
                     <a class="btn btn-info js-tooltip" href="{{ request.get_full_path }}" rel="nofollow" title="Make a GET request on the {{ name }} resource">GET</a>
 
-                    <button class="btn btn-info dropdown-toggle js-tooltip" data-toggle="dropdown" title="Specify a format for the GET request">
-                      <span class="caret"></span>
+                    <button class="btn btn-info dropdown-toggle" data-toggle="dropdown" title="Specify a format for the GET request">
                     </button>
                     <ul class="dropdown-menu">
                       {% for format in available_formats %}
@@ -295,6 +261,7 @@
       <script src="{% static "rest_framework/js/bootstrap.min.js" %}"></script>
       <script src="{% static "rest_framework/js/prettify-min.js" %}"></script>
       <script src="{% static "rest_framework/js/default.js" %}"></script>
+      <script src="{% static "rest_framework/js/argon.min.js" %}"></script>
       <script>
         $(document).ready(function() {
           $('form').ajaxForm();
